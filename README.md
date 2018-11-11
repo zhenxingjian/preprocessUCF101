@@ -14,3 +14,33 @@ Request:
 keras
 
 cv2
+
+The folder will be like:
+
+./
+
+--UCF101
+
+-- --ucfTrainTestlist
+
+-- --UCF-101
+
+-- --processeddata
+
+-- -- --part1
+
+-- -- -- --training
+
+-- -- -- --testing
+
+-- -- --part2
+
+-- -- -- --training
+
+-- -- -- --testing
+
+-- -- --part3
+
+-- -- -- --training
+
+-- -- -- --testing
