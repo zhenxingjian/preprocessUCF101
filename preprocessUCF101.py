@@ -74,8 +74,8 @@ def avi2npy(filelist,labellist,idx,batch_size = 40):
     data = np.asarray(data)
     return data,label
 
-def read_batch_data(partid,batchid,istrain = True):
-    folder_path = "./UCF101/processeddata/part"+str(partid)+"/"
+def read_batch_data(UCFfolder_path , partid , batchid , istrain = True):
+    folder_path = UCFfolder_path + "/part"+str(partid)+"/"
     if istrain:
         if os.path.isfile(folder_path+"training/label"+str(batchid)+'.npy'):
             databatch  = np.load(folder_path+"training/data"+str(batchid)+'.npy')
@@ -142,21 +142,22 @@ if __name__ == '__main__':
         trainbatchnum = int(train_num/batch_size)+1
         testbatchnum = int(test_num/batch_size)+1
 
-        for bidx in range(trainbatchnum/100):
+        for bidx in range(trainbatchnum):
             if not os.path.isfile(folder_path+"training/label"+str(bidx)+'.npy'):
                 databatch,labelbatch = avi2npy(trainpath,trainlabel,bidx,batch_size = 40)
                 np.save(folder_path+"training/data"+str(bidx)+'.npy',databatch)
                 np.save(folder_path+"training/label"+str(bidx)+'.npy',labelbatch)
             print ("Finished training batch number : "+str(bidx))
 
-        for bidx in range(testbatchnum/30):
+        for bidx in range(testbatchnum):
             if not os.path.isfile(folder_path+"testing/label"+str(bidx)+'.npy'):
                 databatch,labelbatch = avi2npy(testpath,testlabel,bidx,batch_size = 40)
                 np.save(folder_path+"testing/data"+str(bidx)+'.npy',databatch)
                 np.save(folder_path+"testing/label"+str(bidx)+'.npy',labelbatch)
             print ("Finished testing batch number : "+str(bidx))
 
-
-
-
+    ############### the way to use read_batch_data
+    UCFfolder_path = "./UCF101/processeddata/"
+    data_1, label_1 = read_batch_data(UCFfolder_path,partid = 1,batchid = 1,istrain = True)
+    ############### 
 
